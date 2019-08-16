@@ -12,5 +12,8 @@
     "mdx-deck": "^3",
     "raw-loader": "^3"
   },
-  "name": "json-schema-core-concepts"
+  "name": "json-schema-core-concepts",
+  "dependencies": {
+    "@mdx-deck/themes": "^3.0.8"
+  }
 }
