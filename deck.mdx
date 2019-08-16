@@ -1,0 +1,64 @@
+import {
+  CodeSurferLayout,
+  CodeSurferColumnLayout,
+  Code,
+  Step,
+} from "code-surfer";
+// import { Horizontal } from "mdx-deck/layouts";
+import { Notes } from "mdx-deck";
+import jsonData from "./example-schema.json";
+// console.log(jsonData);
+// const jsonString = JSON.stringify(jsonData, null, 2);
+// code={JSON.stringify(jsonData, null, 2)}
+// console.log(jsonString);
+const metaSchema = JSON.stringify(jsonData, null, 2)
+
+# JSON Schema!
+
+---
+
+<CodeSurferLayout>
+
+  <Code
+    lang="json"
+    code={metaSchema}
+    title="JSON Schema draft-7 meta-schema"
+    notes="notes notes notes"
+  />
+
+  <Code
+    lang="json"
+    code={metaSchema}
+    focus="1"
+    title="JSON Schema draft-7 meta-schema"
+    notes="notes notes notes  MOREEEE"
+  />
+
+</CodeSurferLayout>
+
+---
+
+<CodeSurferLayout>
+  <Code
+    lang="json"
+    code={JSON.stringify(jsonData, null, 2)}
+    focus="5"
+    title="JSON Schema draft-7 meta-schema"
+  />
+
+</CodeSurferLayout>
+
+---
+
+<CodeSurferLayout>
+
+```json title="A TITLE"
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "http://json-schema.org/draft-07/schema#",
+  "title": "Core schema meta-schema"
+}
+```
+
+</CodeSurferLayout>
+
