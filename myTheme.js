@@ -1,10 +1,14 @@
 export default {
   styles: {
     h1: {
-      'text-align': 'center',
+      'textAlign': 'center',
+    },
+    ul: {
+      // textAlign: 'center',
+      // listStyleType: 'dash'
     }
   },
-  // colors: {
-  //   background: '#31A74D'
-  // }
+  colors: {
+    background: 'white'
+  }
 };

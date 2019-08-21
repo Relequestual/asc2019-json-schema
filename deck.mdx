@@ -1,37 +1,97 @@
 import { code } from 'mdx-deck/themes';
 import myTheme from './myTheme';
 
-export const themes = [code, myTheme];
 import {
   CodeSurferLayout,
   CodeSurferColumnLayout,
   Code,
   Step,
 } from "code-surfer";
+import ContentLayout from './layouts/content';
 // import { Horizontal } from "mdx-deck/layouts";
-import { Notes } from "mdx-deck";
+import { Notes, Invert, Appear } from "mdx-deck";
 import jsonData from "./example-schema.json";
 // console.log(jsonData);
 // const jsonString = JSON.stringify(jsonData, null, 2);
 // code={JSON.stringify(jsonData, null, 2)}
 // console.log(jsonString);
 const metaSchema = JSON.stringify(jsonData, null, 2)
+export const themes = [code, myTheme];
+import mmev1 from "./static/mme-v1.png";
 
 
 # JSON Schema!
 
+<Notes>
+  Some content
+</Notes>
+
 ---
+
+<Invert>
 
 # Validation saves lives
 
----
+</Invert>
 
+---
 # Validation (probably?) saves lives
 
 ---
-
 # Validation changes lives
 ### ~~Validation (probably?) saves lives~~
+
+---
+# Story
+---
+<ContentLayout>
+
+## Matchmaker Exchange API
+
+ - Siloed databases of patient data
+   - <small>(including DNA variants)</small>
+ - Rare and undiagnosed cases
+   - <small>(> 10 per country rare)</small>
+ - Complex logal and ethical situation
+ - Discover and exchange pateint data
+
+</ContentLayout>
+
+<Notes>
+  I'm going to walk through what it might have been like to create a JSON Schema for this API.
+
+  The MME API is a federated search (for similar) and response of potential matches using a patient record.
+
+  Not going to cover the legal, social, or ethical issues. Be assured they were handled properly.
+
+  Today is about the technical.
+</Notes>
+
+---
+<ContentLayout>
+
+## Matchmaker Exchange API
+
+- Each database holds slightly different data
+- Representation of a patient needs to be uniform
+- Write specification using words and examples
+- Release v1.0!
+
+## Sounds easy, right?
+
+</ContentLayout>
+
+---
+
+<Invert>
+
+# Nope
+
+<img style={{
+  maxWidth: '50%'
+}} src={mmev1} />
+
+</Invert>
 
 ---
 

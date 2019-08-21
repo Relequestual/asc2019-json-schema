@@ -4,6 +4,7 @@
   "scripts": {
     "start": "mdx-deck deck.mdx",
     "build": "mdx-deck build deck.mdx",
+    "pdf": "npx website-pdf http://localhost:8000//print -o deck.pdf -h 540 -w 960",
     "test": "echo \"there are no tests\""
   },
   "devDependencies": {
