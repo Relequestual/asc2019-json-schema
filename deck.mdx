@@ -8,21 +8,13 @@ import {
   Step,
 } from "code-surfer";
 import ContentLayout from './layouts/content';
-// import { Horizontal } from "mdx-deck/layouts";
 import { Notes, Invert, Appear } from "mdx-deck";
-import jsonData from "./example-schema.json";
 
-import { schemaFiles } from "./schemas/basic/index.js";
-console.log(schemaFiles);
-const schemaString = _.mapValues(schemaFiles, (schema) => JSON.stringify(schema.default, null, 2));
-console.log(schemaString);
-// const jsonString = JSON.stringify(jsonData, null, 2);
-// code={JSON.stringify(jsonData, null, 2)}
-// console.log(jsonString);
-const metaSchema = JSON.stringify(jsonData, null, 2)
-export const themes = [code, myTheme];
+import basicSchemas from "./schemas/basic";
+
 import mmev1 from "./static/mme-v1.png";
 
+export const themes = [code, myTheme];
 
 # JSON Schema!
 
@@ -112,23 +104,19 @@ import mmev1 from "./static/mme-v1.png";
 ---
 
 <CodeSurferLayout>
-
-
-
   <Code
     lang="json"
-    code={schemaString['001']}
+    code={basicSchemas['001']}
     title="Matchmaker Query Schema"
     notes="notes notes notes"
   />
 
   <Code
     lang="json"
-    code={schemaString['002']}
+    code={basicSchemas['002']}
     title="Matchmaker Query Schema"
     notes="notes notes notes"
   />
-
 </CodeSurferLayout>
 
 ---
