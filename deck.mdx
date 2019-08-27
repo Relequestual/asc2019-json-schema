@@ -11,7 +11,11 @@ import ContentLayout from './layouts/content';
 // import { Horizontal } from "mdx-deck/layouts";
 import { Notes, Invert, Appear } from "mdx-deck";
 import jsonData from "./example-schema.json";
-// console.log(jsonData);
+
+import { schemaFiles } from "./schemas/basic/index.js";
+console.log(schemaFiles);
+const schemaString = _.mapValues(schemaFiles, (schema) => JSON.stringify(schema.default, null, 2));
+console.log(schemaString);
 // const jsonString = JSON.stringify(jsonData, null, 2);
 // code={JSON.stringify(jsonData, null, 2)}
 // console.log(jsonString);
@@ -95,48 +99,36 @@ import mmev1 from "./static/mme-v1.png";
 
 ---
 
+# Building a schema
+
+---
+
+# Requirements for queries
+
+- Root object has a 'patient'
+- 'patient' must have
+
+
+---
+
 <CodeSurferLayout>
+
+
 
   <Code
     lang="json"
-    code={metaSchema}
-    title="JSON Schema draft-7 meta-schema"
+    code={schemaString['001']}
+    title="Matchmaker Query Schema"
     notes="notes notes notes"
   />
 
   <Code
     lang="json"
-    code={metaSchema}
-    focus="1"
-    title="JSON Schema draft-7 meta-schema"
-    notes="notes notes notes  MOREEEE"
+    code={schemaString['002']}
+    title="Matchmaker Query Schema"
+    notes="notes notes notes"
   />
 
 </CodeSurferLayout>
 
 ---
-
-<CodeSurferLayout>
-  <Code
-    lang="json"
-    code={JSON.stringify(jsonData, null, 2)}
-    focus="5"
-    title="JSON Schema draft-7 meta-schema"
-  />
-
-</CodeSurferLayout>
-
----
-
-<CodeSurferLayout>
-
-```json title="A TITLE"
-{
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "http://json-schema.org/draft-07/schema#",
-  "title": "Core schema meta-schema"
-}
-```
-
-</CodeSurferLayout>
-

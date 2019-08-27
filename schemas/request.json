@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "https://schemas.matchmakerexchange.org/v1.0.0/query#",
+  "title": "MatchMakerExchange format for queries",
+  "type": "object",
+  "required": ["patient"],
+  "properties": {
+    "patient": {
+      "$ref": "/v1.0.0/definitions#/definitions/patient"
+    }
+  },
+  "patternProperties": {
+    "^_": true
+  },
+  "additionalProperties": false
+}
