@@ -2647,10 +2647,10 @@ code-point-at@^1.0.0:
   resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
   integrity sha1-DQcLTQQ6W+ozovGkDi7bPZpMz3c=
 
-code-surfer@3.0.0-alpha.0:
-  version "3.0.0-alpha.0"
-  resolved "https://registry.yarnpkg.com/code-surfer/-/code-surfer-3.0.0-alpha.0.tgz#0cbdf2be6dd6c4aea500301f03bae094bb9a8922"
-  integrity sha512-lgYKXAvIPg8oXsUdhIdUP7j2INZhPm3snwbYF8eVH2nbcQfjk4Ti7CMObpAQCxAU9olJT0xr4XefknRzO9FpeA==
+code-surfer@3.0.0-alpha.1:
+  version "3.0.0-alpha.1"
+  resolved "https://registry.yarnpkg.com/code-surfer/-/code-surfer-3.0.0-alpha.1.tgz#a4d8e81259ab7c26628c32fd28c025c039caedb5"
+  integrity sha512-GWQ/bnxpfQj9ca3XiiM+pFcZVazMzlC//6z5gpRgmevohSEMUCyOrHrBJsI04EiizyMrgGXKTBdpYaoTv7dpYA==
   dependencies:
     "@types/theme-ui" "^0.2.0"
     array.prototype.flat "^1.2.1"

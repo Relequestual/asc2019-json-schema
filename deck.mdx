@@ -6,15 +6,16 @@ import {
   CodeSurferColumnLayout,
   Code,
   Step,
+  github,
 } from "code-surfer";
 import ContentLayout from './layouts/content';
-import { Notes, Invert, Appear } from "mdx-deck";
+import { Notes, Invert, Appear, Split } from "mdx-deck";
 
 import basicSchemas from "./schemas/basic";
 
 import mmev1 from "./static/mme-v1.png";
 
-export const themes = [code, myTheme];
+export const themes = [code, myTheme, github];
 
 # JSON Schema!
 
@@ -94,29 +95,52 @@ export const themes = [code, myTheme];
 # Building a schema
 
 ---
+<ContentLayout>
 
-# Requirements for queries
+## Requirements for queries
 
-- Root object has a 'patient'
-- 'patient' must have
+- Root object must have a 'patient'
+- 'patient' must have either properties `genomicFeatures` or `phenotypicFeatures` or both
 
+</ContentLayout>
 
 ---
 
-<CodeSurferLayout>
-  <Code
-    lang="json"
-    code={basicSchemas['001']}
-    title="Matchmaker Query Schema"
-    notes="notes notes notes"
-  />
+<CodeSurferLayout theme={github}>
+<Code
+  lang="json"
+  code={basicSchemas['001']}
+  title="Matchmaker Query Schema"
+/>
 
-  <Code
-    lang="json"
-    code={basicSchemas['002']}
-    title="Matchmaker Query Schema"
-    notes="notes notes notes"
-  />
+<Code
+  lang="json"
+  code={basicSchemas['002']}
+/>
+
+<Code
+  lang="json"
+  code={basicSchemas['003']}
+  focus="1:11"
+  subtitle="❌ Validation seems to do nothing  🤷‍♂️"
+/>
+
+<Code
+  lang="json"
+  code={basicSchemas['003']}
+  focus="1:11"
+  subtitle="This is a schema. A JSON Schema!"
+/>
+
+```diff 2,3,5,6 subtitle="These are known keywords"
+```
+
+```diff 4 subtitle="This is an unknown keyword. Unknown keywords are ignored."
+```
+
 </CodeSurferLayout>
 
+<Notes>`patient` must have either `genomicFeatures` or `phenotypicFeatures` or both</Notes>
+
 ---
+

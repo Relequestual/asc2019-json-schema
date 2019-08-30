@@ -4,8 +4,7 @@ export default {
       'textAlign': 'center',
     },
     ul: {
-      // textAlign: 'center',
-      // listStyleType: 'dash'
+      maxWidth: '80%'
     }
   },
   colors: {
