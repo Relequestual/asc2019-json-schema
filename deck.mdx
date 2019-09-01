@@ -14,6 +14,7 @@ import { Notes, Invert, Appear, Split } from "mdx-deck";
 import basicSchemas from "./schemas/basic";
 
 import mmev1 from "./static/mme-v1.png";
+import drafts from "./static/drafts.png";
 
 export const themes = [code, myTheme, github];
 
@@ -140,7 +141,62 @@ export const themes = [code, myTheme, github];
 
 </CodeSurferLayout>
 
-<Notes>`patient` must have either `genomicFeatures` or `phenotypicFeatures` or both</Notes>
+---
+
+<Invert>
+
+# What's a "schema" anyway?
+
+</Invert>
 
 ---
+
+<ContentLayout>
+
+# JSON Schema
+
+<ul>
+  <li>A vocabulary that allows you to annotate and validate JSON documents.</li>
+<Appear>
+  <li>An IETF "personal draft" document specification</li>
+  <li>JSON!</li>
+  <li>Must be a boolean or an object</li>
+  <li>This talk covers draft-7. Not draft-4, not draft-8</li>
+</Appear>
+</ul>
+
+</ContentLayout>
+
+---
+
+<ContentLayout>
+
+# JSON Schema
+
+- This talk covers draft-7. Not draft-4, not draft-8
+
+  <img style={{
+    maxWidth: '90%'
+  }} src={drafts} />
+
+</ContentLayout>
+
+---
+
+<ContentLayout style={{'fontSize': '32px'}}>
+
+# Key Concepts
+
+Schema “keywords” : Object properties that are applied to the instance
+
+Keywords fall under one or both of two categories (mostly):
+
+Assertions : produce a boolean result when applied to an instance
+Annotations : attach information to an instance for application use
+
+Root Schema : Schema that is the whole JSON document
+Subschemas : A schema as a value of an object or array
+
+Some keywords take a schema as their value
+</ContentLayout>
 

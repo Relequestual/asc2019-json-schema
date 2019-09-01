@@ -9,6 +9,8 @@ export default ({ children }) => (
     alignItems: 'center',
     display: 'flex',
     flexDirection: 'column',
+    paddingLeft: '1em',
+    paddingRight: '1em',
   }}>
     {children}
   </div>
