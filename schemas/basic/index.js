@@ -2,7 +2,7 @@ const _ = require('lodash');
 
 const digits = 3;
 
-const fileNames = _.range(1, 3 + 1).map( num => num.toString().padStart(digits, '0'));
+const fileNames = _.range(1, 7 + 1).map( num => num.toString().padStart(digits, '0'));
 
 const files = fileNames.reduce((contents, file) => ({
   ...contents,

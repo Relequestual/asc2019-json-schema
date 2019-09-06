@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema",
   "title": "MatchMakerExchange format for queries",
   "patient": {
-    "$comment": "`patient` must have either `genomicFeatures` or `phenotypicFeatures` or both",
+    "$comment": "`patient`: `genomicFeatures` or `phenotypicFeatures` or both",
     "oneOf": [ "genomicFeatures", "phenotypicFeatures"]
   }
 }

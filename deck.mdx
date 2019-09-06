@@ -1,4 +1,4 @@
-import { code } from 'mdx-deck/themes';
+import { swiss } from 'mdx-deck/themes';
 import myTheme from './myTheme';
 
 import {
@@ -16,9 +16,18 @@ import basicSchemas from "./schemas/basic";
 import mmev1 from "./static/mme-v1.png";
 import drafts from "./static/drafts.png";
 
-export const themes = [code, myTheme, github];
+export const themes = [swiss, myTheme, github];
 
-# JSON Schema!
+# JSON Schema
+
+### Core Concepts, Common Pitfalls, and Debugging
+
+<p>
+  🧔 Ben Hutton<br/>
+  💼 JSON Schema core<br/>
+  🙌 <a href="https://opencollective.com/json-schema">opencollective.com/json-schema</a><br/>
+  🎤 ASC 2019 - API Specification Conference 2019
+</p>
 
 <Notes>
   Some content
@@ -100,8 +109,8 @@ export const themes = [code, myTheme, github];
 
 ## Requirements for queries
 
-- Root object must have a 'patient'
-- 'patient' must have either properties `genomicFeatures` or `phenotypicFeatures` or both
+- Root object must have a <code>patient</code>
+- <code>patient</code> must have either properties <code>genomicFeatures</code> or <code>phenotypicFeatures</code> or both
 
 </ContentLayout>
 
@@ -161,7 +170,6 @@ export const themes = [code, myTheme, github];
   <li>An IETF "personal draft" document specification</li>
   <li>JSON!</li>
   <li>Must be a boolean or an object</li>
-  <li>This talk covers draft-7. Not draft-4, not draft-8</li>
 </Appear>
 </ul>
 
@@ -183,20 +191,266 @@ export const themes = [code, myTheme, github];
 
 ---
 
-<ContentLayout style={{'fontSize': '32px'}}>
+<ContentLayout >
 
 # Key Concepts
 
-Schema “keywords” : Object properties that are applied to the instance
+**Schema “keywords”** : Object properties that are applied to the instance<br/><br/>
+**Instance** : The JSON document being validated or associated with a Schema<br/><br/>
+**Root Schema** : Schema that is the whole JSON document<br/>
+**Subschema** : A schema as a value of an object or array<br/><br/><br/>
+Keywords fall under one or both of two categories (mostly):<br/><br/>
+**Assertions** : produce a boolean result when applied to an instance<br/>
+**Annotations** : attach information to an instance for application use<br/><br/>
 
-Keywords fall under one or both of two categories (mostly):
-
-Assertions : produce a boolean result when applied to an instance
-Annotations : attach information to an instance for application use
-
-Root Schema : Schema that is the whole JSON document
-Subschemas : A schema as a value of an object or array
-
-Some keywords take a schema as their value
 </ContentLayout>
 
+---
+
+# "`properties`" keyword
+
+<p><code>properties</code> is an object</p>
+<p>The values of the object are applied to the instance according to matching objects keys</p>
+
+---
+
+<CodeSurferLayout theme={github}>
+<Code
+  lang="json"
+  code={basicSchemas['003']}
+  focus="4"
+  subtitle="This is an unknown keyword. Unknown keywords are ignored."
+/>
+
+<Code
+  lang="json"
+  code={basicSchemas['004']}
+  subtitle="The value of `patient` is a subschema and is now applied to the same keyed value in the instance"
+/>
+
+<Code
+  lang="json"
+  code={basicSchemas['004']}
+  focus="7:10"
+  subtitle="Error: The items in `oneOf` must be a Schema"
+/>
+
+<Code
+  lang="json"
+  code={basicSchemas['005']}
+  subtitle="Now each item in the array is a Schema"
+/>
+
+<Code
+  lang="json"
+  code={basicSchemas['005']}
+  focus="10,15"
+  subtitle="Remember, the values of a `properties` object must be Schemas. A Boolean is a valid Schema."
+/>
+
+</CodeSurferLayout>
+
+---
+
+# A Boolean can be a schema?
+
+---
+
+<Invert>
+
+# What's a Schema again? (pt 2)
+
+</Invert>
+
+---
+
+<ContentLayout>
+
+### An Object or a Boolean
+
+<div style={{ display: 'flex' }}>
+  <div style={{ margin: '0em 1em' }}>
+
+#### Always passes validation
+
+  <code>{"{}"}</code>
+
+  <p>An empty object</p>
+
+  <code lang="json">true</code>
+
+  <p>a `true` boolean value</p>
+
+  </div>
+  <div style={{ margin: '0em 1em' }}>
+
+#### Always fails validation
+
+  <code lang="json">{'{ "not": {} }'}</code>
+
+  <p>`not` keyword: inverts the assertion</p>
+
+  <code lang="json">false</code>
+
+  <p>a `false` boolean value</p>
+
+  </div>
+
+</div>
+
+</ContentLayout>
+
+---
+
+### Does it work?
+
+<CodeSurferColumnLayout sizes={[1, 1]}>
+
+<Step subtitle="Let's add the subschemas">
+
+  <Code
+    lang="json"
+    title="Schema"
+    code={basicSchemas['006']}
+  />
+
+  ```json title="Instance"
+    {
+      "patient": {
+      }
+    }
+  ```
+
+</Step>
+
+<Step subtitle="✅ This instance validates OK...">
+
+  <Code
+    lang="json"
+    code={basicSchemas['007']}
+  />
+
+  ```json 1:7
+    {
+      "patient": {
+        "phenotypicFeaturs": [
+          "long nose"
+        ]
+      }
+    }
+  ```
+
+</Step>
+
+<Step subtitle="✅ ...and this one...">
+
+  <Code
+    lang="json"
+    code={basicSchemas['007']}
+    focus="1:24"
+  />
+
+  ```json 1:7
+    {
+      "patient": {
+        "genomicFeatures": [
+          "1:2323_CA>A"
+        ]
+      }
+    }
+  ```
+
+</Step>
+
+<Step subtitle="✅ ...and both?">
+
+  <Code
+    lang="json"
+    code={basicSchemas['007']}
+    focus="1:24"
+  />
+
+  ```json 1:10
+    {
+      "patient": {
+        "phenotypicFeaturs": [
+          "long nose"
+        ],
+        "genomicFeatures": [
+          "1:2323_CA>A"
+        ]
+      }
+    }
+  ```
+
+</Step>
+
+<Step subtitle="🤔 How about something invalid? ✅">
+
+  <Code
+    lang="json"
+    code={basicSchemas['007']}
+    focus="1:24"
+  />
+
+  ```json 1:5
+    {
+      "patient": {
+        "phenotypicFeaturs": "long nose"
+      }
+    }
+  ```
+
+</Step>
+
+<Step subtitle="😕 But didn't I define that should be an array?">
+
+  <Code
+    lang="json"
+    code={basicSchemas['007']}
+    focus="10:12"
+  />
+
+  ```json 1:5
+    {
+      "patient": {
+        "phenotypicFeaturs": "long nose"
+      }
+    }
+  ```
+
+</Step>
+
+
+</CodeSurferColumnLayout>
+
+---
+
+<Invert>
+
+# oneOf what?
+
+</Invert>
+
+---
+
+<ContentLayout >
+
+# (More) Key Concepts
+
+**Applicator keywords**: Determin how subschemas are applied to an instance location.
+
+Include, but not limited to...
+
+<p><code>oneOf</code>, <code>allOf</code>, and <code>anyOf</code></p>
+
+The result of applying a schema to an instance is includes an assertion of validity.
+
+<p>The value of <code>*Of</code> keywords must be an array of Schemas.</p>
+
+The resulting assertion is a combination of the assertion results.
+
+<p>For example, <code>oneOf</code> requires that ONLY one of the Schemas in the array is valid.</p>
+
+
+</ContentLayout>
