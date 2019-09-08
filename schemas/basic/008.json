@@ -4,14 +4,12 @@
   "properties": {
     "patient": {
       "anyOf": [
+        false,
         {
           "properties": {
-            "genomicFeatures": true
-          }
-        },
-        {
-          "properties": {
-            "phenotypicFeatures": true
+            "phenotypicFeatures": {
+              "type": ["array"]
+            }
           }
         }
       ]

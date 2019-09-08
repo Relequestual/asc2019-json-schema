@@ -232,7 +232,7 @@ Keywords fall under one or both of two categories (mostly):<br/><br/>
   lang="json"
   code={basicSchemas['004']}
   focus="7:10"
-  subtitle="Error: The items in `oneOf` must be a Schema"
+  subtitle="Error: The items in `anyOf` must be a Schema"
 />
 
 <Code
@@ -428,7 +428,7 @@ Keywords fall under one or both of two categories (mostly):<br/><br/>
 
 <Invert>
 
-# oneOf what?
+# anyOf what?
 
 </Invert>
 
@@ -454,3 +454,101 @@ The resulting assertion is a combination of the assertion results.
 
 
 </ContentLayout>
+
+---
+
+### Why doesn't it work?
+
+<CodeSurferColumnLayout sizes={[1, 1]}>
+
+<Step subtitle="😕 But didn't I define that should be an array?">
+
+  <Code
+    lang="json"
+    code={basicSchemas['007']}
+    focus="10:12"
+  />
+
+  ```json 1:5
+    {
+      "patient": {
+        "phenotypicFeaturs": "long nose"
+      }
+    }
+  ```
+
+</Step>
+
+<Step subtitle="💡 This is a schema, and booleans are schemas...">
+
+  <Code
+    lang="json"
+    code={basicSchemas['007']}
+    focus="7:13"
+  />
+
+  ```json 1:5
+    {
+      "patient": {
+        "phenotypicFeaturs": "long nose"
+      }
+    }
+  ```
+
+</Step>
+
+<Step subtitle="🧐 ... I can replace schemas with boolean values to debug the schema">
+
+  <Code
+    lang="json"
+    code={basicSchemas['008']}
+    focus="7:13"
+  />
+
+  ```json 1:5
+    {
+      "patient": {
+        "phenotypicFeaturs": "long nose"
+      }
+    }
+  ```
+
+</Step>
+
+<Step subtitle="Validation still passes? What gives?">
+
+  <Code
+    lang="json"
+    code={basicSchemas['008']}
+    focus="6:16"
+  />
+
+  ```json 1:5
+    {
+      "patient": {
+        "phenotypicFeaturs": "long nose"
+      }
+    }
+  ```
+
+</Step>
+
+<Step subtitle="`properties.patient.`">
+
+  <Code
+    lang="json"
+    code={basicSchemas['008']}
+    focus="6:16"
+  />
+
+  ```json 1:5
+    {
+      "patient": {
+        "phenotypicFeaturs": "long nose"
+      }
+    }
+  ```
+
+</Step>
+
+</CodeSurferColumnLayout>

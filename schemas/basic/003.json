@@ -3,6 +3,6 @@
   "title": "MatchMakerExchange format for queries",
   "patient": {
     "$comment": "`patient`: `genomicFeatures` or `phenotypicFeatures` or both",
-    "oneOf": [ "genomicFeatures", "phenotypicFeatures"]
+    "anyOf": [ "genomicFeatures", "phenotypicFeatures"]
   }
 }

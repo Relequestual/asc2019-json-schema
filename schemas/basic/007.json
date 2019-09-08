@@ -3,7 +3,7 @@
   "title": "MatchMakerExchange format for queries",
   "properties": {
     "patient": {
-      "oneOf": [
+      "anyOf": [
         {
           "properties": {
             "genomicFeatures": {
