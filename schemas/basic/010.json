@@ -3,17 +3,22 @@
   "title": "MatchMakerExchange format for queries",
   "properties": {
     "patient": {
-      "$comment": "`patient`: `genomicFeatures` or `phenotypicFeatures` or both",
       "anyOf": [
         {
           "properties": {
-            "phenotypicFeatures": true
-          }
+            "phenotypicFeatures": {
+              "type": ["array"]
+            }
+          },
+          "additionalProperties": false
         },
         {
           "properties": {
-            "genomicFeatures": true
-          }
+            "genomicFeatures": {
+              "type": ["array"]
+            }
+          },
+          "additionalProperties": false
         }
       ]
     }

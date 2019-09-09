@@ -333,7 +333,7 @@ Keywords fall under one or both of two categories (mostly):<br/><br/>
   ```json 1:7
     {
       "patient": {
-        "phenotypicFeaturs": [
+        "phenotypicFeatures": [
           "long nose"
         ]
       }
@@ -373,7 +373,7 @@ Keywords fall under one or both of two categories (mostly):<br/><br/>
   ```json 1:10
     {
       "patient": {
-        "phenotypicFeaturs": [
+        "phenotypicFeatures": [
           "long nose"
         ],
         "genomicFeatures": [
@@ -385,7 +385,7 @@ Keywords fall under one or both of two categories (mostly):<br/><br/>
 
 </Step>
 
-<Step subtitle="🤔 How about something invalid? ✅">
+<Step subtitle="🤔 How about something invalid?... ✅">
 
   <Code
     lang="json"
@@ -396,7 +396,7 @@ Keywords fall under one or both of two categories (mostly):<br/><br/>
   ```json 1:5
     {
       "patient": {
-        "phenotypicFeaturs": "long nose"
+        "phenotypicFeatures": "long nose"
       }
     }
   ```
@@ -414,7 +414,7 @@ Keywords fall under one or both of two categories (mostly):<br/><br/>
   ```json 1:5
     {
       "patient": {
-        "phenotypicFeaturs": "long nose"
+        "phenotypicFeatures": "long nose"
       }
     }
   ```
@@ -444,14 +444,21 @@ Include, but not limited to...
 
 <p><code>oneOf</code>, <code>allOf</code>, and <code>anyOf</code></p>
 
-The result of applying a schema to an instance is includes an assertion of validity.
+</ContentLayout>
+
+---
+
+<ContentLayout >
+
+# <code>*Of</code> applicators
 
 <p>The value of <code>*Of</code> keywords must be an array of Schemas.</p>
+
+The result of applying a schema to an instance is includes an assertion of validity.
 
 The resulting assertion is a combination of the assertion results.
 
 <p>For example, <code>oneOf</code> requires that ONLY one of the Schemas in the array is valid.</p>
-
 
 </ContentLayout>
 
@@ -472,14 +479,14 @@ The resulting assertion is a combination of the assertion results.
   ```json 1:5
     {
       "patient": {
-        "phenotypicFeaturs": "long nose"
+        "phenotypicFeatures": "long nose"
       }
     }
   ```
 
 </Step>
 
-<Step subtitle="💡 This is a schema, and booleans are schemas...">
+<Step subtitle="💡 This is a schema. Schemas can be booleans...">
 
   <Code
     lang="json"
@@ -490,7 +497,7 @@ The resulting assertion is a combination of the assertion results.
   ```json 1:5
     {
       "patient": {
-        "phenotypicFeaturs": "long nose"
+        "phenotypicFeatures": "long nose"
       }
     }
   ```
@@ -508,14 +515,14 @@ The resulting assertion is a combination of the assertion results.
   ```json 1:5
     {
       "patient": {
-        "phenotypicFeaturs": "long nose"
+        "phenotypicFeatures": "long nose"
       }
     }
   ```
 
 </Step>
 
-<Step subtitle="Validation still passes? What gives?">
+<Step subtitle="Validation still passes? What gives? (second subschema doesn't define `phenotypicFeatures`">
 
   <Code
     lang="json"
@@ -526,14 +533,14 @@ The resulting assertion is a combination of the assertion results.
   ```json 1:5
     {
       "patient": {
-        "phenotypicFeaturs": "long nose"
+        "phenotypicFeatures": "long nose"
       }
     }
   ```
 
 </Step>
 
-<Step subtitle="`properties.patient.`">
+<Step subtitle="In the Schema, `properties.patient.anyOf[1]` ONLY expresses a constraint on a property called `phenotypicFeatures`. Nothing else.">
 
   <Code
     lang="json"
@@ -544,7 +551,60 @@ The resulting assertion is a combination of the assertion results.
   ```json 1:5
     {
       "patient": {
-        "phenotypicFeaturs": "long nose"
+        "phenotypicFeatures": "long nose"
+      }
+    }
+  ```
+
+</Step>
+
+<Step subtitle="OK. Let's dissallow additional properties in that subschema.">
+
+  <Code
+    lang="json"
+    code={basicSchemas['009']}
+  />
+
+  ```json 1:5
+    {
+      "patient": {
+        "phenotypicFeatures": "long nose"
+      }
+    }
+  ```
+
+</Step>
+
+<Step subtitle="... and add back the other subschema...">
+
+  <Code
+    lang="json"
+    code={basicSchemas['010']}
+    focus="7:16"
+  />
+
+  ```json 1:5
+    {
+      "patient": {
+        "phenotypicFeatures": "long nose"
+      }
+    }
+  ```
+
+</Step>
+
+<Step subtitle="... ❌ YES! Validation fails, as expected">
+
+  <Code
+    lang="json"
+    code={basicSchemas['010']}
+    focus="1:27"
+  />
+
+  ```json 1:5
+    {
+      "patient": {
+        "phenotypicFeatures": "long nose"
       }
     }
   ```
@@ -552,3 +612,114 @@ The resulting assertion is a combination of the assertion results.
 </Step>
 
 </CodeSurferColumnLayout>
+
+---
+
+# We fixed it!
+
+## Almost
+
+
+---
+
+<CodeSurferColumnLayout>
+
+<Step subtitle="What happens if we... remove the properties of `patient`?">
+
+  <Code
+    lang="json"
+    code={basicSchemas['010']}
+    focus="1:27"
+  />
+
+  ```json 1:5
+    {
+      "patient": {
+        "phenotypicFeatures": "long nose"
+      }
+    }
+  ```
+
+</Step>
+
+<Step subtitle="... ✅ 😠 STILL missing something!">
+
+  <Code
+    lang="json"
+    code={basicSchemas['010']}
+    focus="1:27"
+  />
+
+  ```json 1:5
+    {
+      "patient": {
+
+      }
+    }
+  ```
+
+</Step>
+
+<Step subtitle="Keys of `properties` are not expressing a requirement they exist!">
+
+  <Code
+    lang="json"
+    code={basicSchemas['010']}
+    focus="8:13"
+  />
+
+  ```json 1:5
+    {
+      "patient": {
+
+      }
+    }
+  ```
+
+</Step>
+
+<Step subtitle="Need to use `required` to require them">
+
+  <Code
+    lang="json"
+    code={basicSchemas['011']}
+  />
+
+  ```json 1:5
+    {
+      "patient": {
+
+      }
+    }
+  ```
+
+</Step>
+
+<Step subtitle="❌ Validation now fails as expected!">
+
+  <Code
+    lang="json"
+    code={basicSchemas['011']}
+    focus="1:31"
+  />
+
+  ```json 1:5
+    {
+      "patient": {
+
+      }
+    }
+  ```
+
+</Step>
+
+
+</CodeSurferColumnLayout>
+
+---
+
+# What did we learn?
+
+- Some keywords have values that are a JSON Schema (a subschema)
+- <code>*Of</code> keywords are applicators that take an array of subschemas
+- You can set the value of a subschema to a boolean <code>false</code> to check the validation path is as you expect

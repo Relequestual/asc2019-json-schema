@@ -7,7 +7,7 @@
         false,
         {
           "properties": {
-            "phenotypicFeatures": {
+            "genomicFeatures": {
               "type": ["array"]
             }
           }

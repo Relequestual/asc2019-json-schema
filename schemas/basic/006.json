@@ -6,12 +6,12 @@
       "anyOf": [
         {
           "properties": {
-            "genomicFeatures": true
+            "phenotypicFeatures": true
           }
         },
         {
           "properties": {
-            "phenotypicFeatures": true
+            "genomicFeatures": true
           }
         }
       ]

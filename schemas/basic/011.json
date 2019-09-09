@@ -5,18 +5,22 @@
     "patient": {
       "anyOf": [
         {
+          "required": ["phenotypicFeatures"],
           "properties": {
             "phenotypicFeatures": {
               "type": ["array"]
             }
-          }
+          },
+          "additionalProperties": false
         },
         {
+          "required": ["genomicFeatures"],
           "properties": {
             "genomicFeatures": {
               "type": ["array"]
             }
-          }
+          },
+          "additionalProperties": false
         }
       ]
     }
