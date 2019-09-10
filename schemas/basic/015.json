@@ -30,6 +30,19 @@
           "required": ["genomicFeatures"]
         }
       ]
+    },
+    "regularPatient": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": [
+            "string"
+          ]
+        }
+      }
     }
   },
   "properties": {

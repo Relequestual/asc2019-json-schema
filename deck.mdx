@@ -759,13 +759,115 @@ The resulting assertion is a combination of the assertion results.
 <Code
   lang="json"
   code={basicSchemas['012']}
-  subtitle="Move field definitions to ... `definitions`"
+  subtitle="Move field definitions to ... `definitions`, and use references"
 />
 
 <Code
   lang="json"
   code={basicSchemas['013']}
-  subtitle="The `anyOf` only needed to be used for the `required` keyword"
+  subtitle="Move previous `patient` to definition of `geneticsPatient`"
+/>
+
+<Code
+  lang="json"
+  code={basicSchemas['014']}
+  focus="15:33"
+  subtitle="The `anyOf` only needed to be used for the `required` condition"
+/>
+
+<Code
+  lang="json"
+  code={basicSchemas['015']}
+  subtitle="Here's the extra field that needs to be added"
+/>
+
+<Code
+  lang="json"
+  code={basicSchemas['016']}
+  subtitle="Modify `patient` be a regualr and genetics patient"
+/>
+
+<Code
+  lang="json"
+  code={basicSchemas['016']}
+  focus="1:60"
+  subtitle="Validation always fails... how do we fix this? 😖"
 />
 
 </CodeSurferLayout>
+
+---
+
+  <CodeSurferLayout>
+
+```json subtitle="❌ Validation always fails... how do we fix this? 😖" title="Does it work?"
+  {
+    "patient": {
+      "phenotypicFeatures": ["long nose"],
+      "name": "bob"
+    }
+  }
+```
+
+  </CodeSurferLayout>
+
+### Validation Error:
+
+<p>
+should NOT have additional properties.<br/>
+additionalProperties at "#/additionalProperties"<br/>
+Instance location: "/patient"
+</p>
+
+---
+
+<CodeSurferLayout>
+
+<Code
+  lang="json"
+  code={basicSchemas['016']}
+  focus="15:33"
+  subtitle="This the subschema which defines `additionalProperties: false`"
+/>
+
+<Code
+  lang="json"
+  code={basicSchemas['016']}
+  focus="53:62"
+  subtitle="It's used in the document root `properties`'s value"
+/>
+
+<Code
+  lang="json"
+  code={basicSchemas['016']}
+  focus="38:50"
+  subtitle="We need to allow all the fields from `regularPatient`..."
+/>
+
+<Code
+  lang="json"
+  code={basicSchemas['016']}
+  focus="15:23"
+  subtitle="... and from `geneticsPatient`, but no others."
+/>
+
+</CodeSurferLayout>
+
+---
+
+<ContentLayout>
+
+### <code>additionalProperties</code>
+
+<p>What *specifically* does `additionalProperties` DO?</p>
+<p>`additionalProperties` takes a schema as it's value. Often this is boolean `false`.</p>
+<p>The schema is only applied to the instance object's values, where the keys have not already been evaluated as a result of `properties` or `patternProperties` <b>within the same schema object</b>.</p>
+<p>`additionalProperties` cannot "see through" applicator keywords (such as `allOf` and `$ref` references)</p>
+<p><pre style={{whiteSpace: 'pre-wrap', backgroundColor: 'rgba(27, 31, 35, 0.05)', marginTop: 0}}>Validation with "additionalProperties" applies only to the child values of instance names that do not match any names in "properties", and do not match any regular expression in "patternProperties".</pre>
+  [draft-handrews-json-schema-validation-01]
+</p>
+
+
+</ContentLayout>
+
+---

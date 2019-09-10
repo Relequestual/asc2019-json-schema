@@ -3,27 +3,34 @@
   "title": "MatchMakerExchange format for queries",
   "definitions": {
     "phenotypicFeatures": {
-      "type": ["array"]
+      "type": [
+        "array"
+      ]
     },
     "genomicFeatures": {
-      "type": ["array"]
+      "type": [
+        "array"
+      ]
     },
     "geneticsPatient": {
-      "properties": {
-        "phenotypicFeatures": {
-          "$ref": "#/definitions/phenotypicFeatures"
-        },
-        "genomicFeatures": {
-          "$ref": "#/definitions/genomicFeatures"
-        }
-      },
-      "additionalProperties": false,
       "anyOf": [
         {
-          "required": ["phenotypicFeatures"]
+          "required": ["phenotypicFeatures"],
+          "properties": {
+            "phenotypicFeatures": {
+              "$ref": "#/definitions/phenotypicFeatures"
+            }
+          },
+          "additionalProperties": false
         },
         {
-          "required": ["genomicFeatures"]
+          "required": ["genomicFeatures"],
+          "properties": {
+            "genomicFeatures": {
+              "$ref": "#/definitions/genomicFeatures"
+            }
+          },
+          "additionalProperties": false
         }
       ]
     }

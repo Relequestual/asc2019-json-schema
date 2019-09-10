@@ -30,11 +30,31 @@
           "required": ["genomicFeatures"]
         }
       ]
+    },
+    "regularPatient": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "type": [
+            "string"
+          ]
+        }
+      }
     }
   },
   "properties": {
     "patient": {
-      "$ref": "#/definitions/geneticsPatient"
+      "allOf": [
+        {
+          "$ref": "#/definitions/regularPatient"
+        },
+        {
+          "$ref": "#/definitions/geneticsPatient"
+        }
+      ]
     }
   }
 }
