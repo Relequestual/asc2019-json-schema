@@ -1,0 +1,42 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "title": "MatchMakerExchange format for queries",
+  "definitions": {
+    "phenotypicFeatures": {
+      "type": ["array"]
+    },
+    "genomicFeatures": {
+      "type": ["array"]
+    },
+    "geneticsPatient": {
+      "properties": {
+        "phenotypicFeatures": {
+          "$ref": "#/definitions/phenotypicFeatures"
+        },
+        "genomicFeatures": {
+          "$ref": "#/definitions/genomicFeatures"
+        }
+      },
+      "additionalProperties": false,
+      "anyOf": [
+        {
+          "required": ["phenotypicFeatures"]
+        },
+        {
+          "required": ["genomicFeatures"]
+        }
+      ]
+    },
+    "defaultPatient":{
+      "properties": {
+        "name" : true,
+        "phoneNumber": true
+      }
+    }
+  },
+  "properties": {
+    "patient": {
+      "$ref": "#/definitions/geneticsPatient"
+    }
+  }
+}

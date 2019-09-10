@@ -214,7 +214,7 @@ Keywords fall under one or both of two categories (mostly):<br/><br/>
 
 ---
 
-<CodeSurferLayout theme={github}>
+<CodeSurferLayout>
 <Code
   lang="json"
   code={basicSchemas['003']}
@@ -428,7 +428,7 @@ Keywords fall under one or both of two categories (mostly):<br/><br/>
 
 <Invert>
 
-# anyOf what?
+# <code>anyOf</code> what?
 
 </Invert>
 
@@ -718,8 +718,54 @@ The resulting assertion is a combination of the assertion results.
 
 ---
 
-# What did we learn?
+# What did we discover?
 
 - Some keywords have values that are a JSON Schema (a subschema)
 - <code>*Of</code> keywords are applicators that take an array of subschemas
 - You can set the value of a subschema to a boolean <code>false</code> to check the validation path is as you expect
+
+---
+
+# Spec change!
+
+#### That doesn't happen, does it?
+
+---
+
+<ContentLayout >
+
+# Spec change
+
+- Tidy the subschemas into <code>definitions</code>
+- Refactor the schema
+- <code>patient</code> now needs to incldue some additional fields. A definition is provided.
+
+</ContentLayout >
+
+---
+
+# Let's do this
+
+---
+
+<CodeSurferLayout>
+
+<Code
+  lang="json"
+  code={basicSchemas['011']}
+  subtitle="Here's where we got to"
+/>
+
+<Code
+  lang="json"
+  code={basicSchemas['012']}
+  subtitle="Move field definitions to ... `definitions`"
+/>
+
+<Code
+  lang="json"
+  code={basicSchemas['013']}
+  subtitle="The `anyOf` only needed to be used for the `required` keyword"
+/>
+
+</CodeSurferLayout>
