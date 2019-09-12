@@ -23,7 +23,7 @@ export const themes = [swiss, myTheme, github];
 ### Core Concepts, Common Pitfalls, and Debugging
 
 <p>
-  🧔 Ben Hutton<br/>
+  🧔 Ben Hutton - @relequestual<br/>
   💼 JSON Schema core<br/>
   🙌 <a href="https://opencollective.com/json-schema">opencollective.com/json-schema</a><br/>
   🎤 ASC 2019 - API Specification Conference 2019
@@ -834,7 +834,7 @@ Instance location: "/patient"
   lang="json"
   code={basicSchemas['016']}
   focus="53:62"
-  subtitle="It's used in the document root `properties`'s value"
+  subtitle="It's referenced in the document root `properties`'s value"
 />
 
 <Code
@@ -847,7 +847,7 @@ Instance location: "/patient"
 <Code
   lang="json"
   code={basicSchemas['016']}
-  focus="15:23"
+  focus="38:50"
   subtitle="... and from `geneticsPatient`, but no others."
 />
 
@@ -859,10 +859,10 @@ Instance location: "/patient"
 
 ### <code>additionalProperties</code>
 
-<p>What *specifically* does `additionalProperties` DO?</p>
-<p>`additionalProperties` takes a schema as it's value. Often this is boolean `false`.</p>
-<p>The schema is only applied to the instance object's values, where the keys have not already been evaluated as a result of `properties` or `patternProperties` <b>within the same schema object</b>.</p>
-<p>`additionalProperties` cannot "see through" applicator keywords (such as `allOf` and `$ref` references)</p>
+<p>What <b>specifically</b> does <code>additionalProperties</code> DO?</p>
+<p><code>additionalProperties</code> takes a schema as it's value. Often this is boolean <code>false</code>.</p>
+<p>The schema is only applied to the instance object's values, where the keys have not already been evaluated as a result of <code>properties</code> or <code>patternProperties</code> <b>within the same schema object</b>.</p>
+<p><code>additionalProperties</code> cannot "see through" applicator keywords (such as <code>allOf</code> and <code>$ref</code> references)</p>
 <p><pre style={{whiteSpace: 'pre-wrap', backgroundColor: 'rgba(27, 31, 35, 0.05)', marginTop: 0}}>Validation with "additionalProperties" applies only to the child values of instance names that do not match any names in "properties", and do not match any regular expression in "patternProperties".</pre>
   [draft-handrews-json-schema-validation-01]
 </p>
@@ -871,3 +871,282 @@ Instance location: "/patient"
 </ContentLayout>
 
 ---
+
+<CodeSurferLayout>
+
+<Code
+  lang="json"
+  code={basicSchemas['016']}
+  subtitle="Here's the schema again"
+/>
+
+<Code
+  lang="json"
+  code={basicSchemas['016']}
+  focus="24"
+  subtitle='And our "problem" line'
+/>
+
+<Code
+  lang="json"
+  code={basicSchemas['016']}
+  focus="16:24"
+  subtitle="Now we know `additionalProperties` is applied depending on our `properties`"
+/>
+
+<Code
+  lang="json"
+  code={basicSchemas['017']}
+  focus="16:23"
+  subtitle="Simply removing `additionalProperties` is not going to be enough!`"
+/>
+
+<Code
+  lang="json"
+  code={basicSchemas['018']}
+  subtitle="`additionalProperties` needs to be hoised to the super object schema..."
+/>
+
+<Code
+  lang="json"
+  code={basicSchemas['018']}
+  focus="52:62"
+  subtitle="But given there are no `properties` defined at this level, we have now prevented ALL properties..."
+/>
+
+<Code
+  lang="json"
+  code={basicSchemas['019']}
+  subtitle="The only solution is to add `properties`, but we don't want to define any constraints on their value in this subschema"
+/>
+
+</CodeSurferLayout>
+
+---
+
+# We have our schema
+### Let's recap how it works
+
+---
+
+<CodeSurferColumnLayout sizes={[1, 1]}>
+
+<Step subtitle="Here's our WHOLE schema and the instance">
+
+  <Code
+    lang="json"
+    title="Schema"
+    focus="1:10"
+    code={basicSchemas['019']}
+  />
+
+```json title="Instance"
+  {
+    "patient": {
+      "phenotypicFeatures": ["long nose"],
+      "name": "bob"
+    }
+  }
+```
+
+</Step>
+
+<Step subtitle="`properties.patient` subschema is applied to to the value of `patient` in our instance object">
+
+  <Code
+    lang="json"
+    focus="52:67"
+    code={basicSchemas['019']}
+  />
+
+```json 2:5
+  {
+    "patient": {
+      "phenotypicFeatures": ["long nose"],
+      "name": "bob"
+    }
+  }
+```
+
+</Step>
+
+<Step subtitle="Only patient properties defined in properties are allowed. No others. No constraints are placed on the properties values.">
+
+  <Code
+    lang="json"
+    focus="53:58"
+    code={basicSchemas['019']}
+  />
+
+```json 2:5
+  {
+    "patient": {
+      "phenotypicFeatures": ["long nose"],
+      "name": "bob"
+    }
+  }
+```
+
+</Step>
+
+<Step subtitle="All of the following schemas are applied to `patient`...">
+
+  <Code
+    lang="json"
+    focus="59:66"
+    code={basicSchemas['019']}
+  />
+
+```json 2:5
+  {
+    "patient": {
+      "phenotypicFeatures": ["long nose"],
+      "name": "bob"
+    }
+  }
+```
+
+</Step>
+
+<Step subtitle="`definitions` is a keyword to define reuseable subschemas which can be referenced">
+
+  <Code
+    lang="json"
+    focus="4"
+    code={basicSchemas['019']}
+  />
+
+```json 2:5
+  {
+    "patient": {
+      "phenotypicFeatures": ["long nose"],
+      "name": "bob"
+    }
+  }
+```
+
+</Step>
+
+<Step subtitle="`regularPatient` defines `patient` must be an object, which must have a property of `name`">
+
+  <Code
+    lang="json"
+    focus="37:41"
+    code={basicSchemas['019']}
+  />
+
+```json 2:5
+  {
+    "patient": {
+      "phenotypicFeatures": ["long nose"],
+      "name": "bob"
+    }
+  }
+```
+
+</Step>
+
+<Step subtitle="If it's an object (which is must be), a property called 'name' (which it must have), must be a string">
+
+  <Code
+    lang="json"
+    focus="42:48"
+    code={basicSchemas['019']}
+  />
+
+```json 2:5
+  {
+    "patient": {
+      "phenotypicFeatures": ["long nose"],
+      "name": "bob"
+    }
+  }
+```
+
+</Step>
+
+<Step subtitle="A `geneticsPatient` must have at least one of `phenotypicFeatures` or `genomicFeatures`">
+
+  <Code
+    lang="json"
+    focus="15,24:35"
+    code={basicSchemas['019']}
+  />
+
+```json 2:5
+  {
+    "patient": {
+      "phenotypicFeatures": ["long nose"],
+      "name": "bob"
+    }
+  }
+```
+
+</Step>
+
+<Step subtitle="`phenotypicFeatures` and `genomicFeatures` are defined in `definitions` and are referenced by the individual properties of `geneticsPatient`">
+
+  <Code
+    lang="json"
+    focus="4:14,17:22"
+    code={basicSchemas['019']}
+  />
+
+```json 2:5
+  {
+    "patient": {
+      "phenotypicFeatures": ["long nose"],
+      "name": "bob"
+    }
+  }
+```
+
+</Step>
+
+
+</CodeSurferColumnLayout>
+
+---
+
+### allOf $ref schemas and <code>additionalProperties: false</code>
+
+Being able to combine schema objects without additional properties is a VERY common pain point.
+
+We recognised this and fixed it in draft-8, but that's a whole other talk.
+
+---
+
+<ContentLayout>
+
+# What else did we discover?
+
+- Some keywords take a schema as their value
+- Schemas may be boolean values, even when as a value of the `properties` object
+- Constructing and merging complex schemas is likely to require some duplication
+- `additionalProperties` CANNOT "See Through" applicator keywords like "*Of" or "$ref".
+
+
+</ContentLayout>
+
+---
+
+# Thank you all
+
+- Previous team
+- Current team
+- Contributors and community
+- Implementaion authors
+- all of you
+
+---
+
+# JSON Schema
+
+### Core Concepts, Common Pitfalls, and Debugging
+
+<p>
+  🧔 Ben Hutton<br/>
+  💼 JSON Schema core<br/>
+  🙌 <a href="https://opencollective.com/json-schema">opencollective.com/json-schema</a><br/>
+  🎤 ASC 2019 - API Specification Conference 2019
+</p>
