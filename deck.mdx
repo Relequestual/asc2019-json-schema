@@ -15,19 +15,29 @@ import basicSchemas from "./schemas/basic";
 
 import mmev1 from "./static/mme-v1.png";
 import drafts from "./static/drafts.png";
+import profile from "./static/bhutton-circle.png"
 
 export const themes = [swiss, myTheme, github];
+
+
+<!-- Change this split to be normal, but the image and info lines be under the title -->
+<Split>
+  <div>
 
 # JSON Schema
 
 ### Core Concepts, Common Pitfalls, and Debugging
-
+</div>
 <p>
+  <img src={profile} /><br/>
   🧔 Ben Hutton - @relequestual<br/>
   💼 JSON Schema core<br/>
   🙌 <a href="https://opencollective.com/json-schema">opencollective.com/json-schema</a><br/>
+  ☕ <a href="https://ko-fi.com/relequestual">ko-fi.com/relequestual</a><br/>
   🎤 ASC 2019 - API Specification Conference 2019
 </p>
+
+</Split>
 
 <Notes>
   Some content
@@ -522,7 +532,7 @@ The resulting assertion is a combination of the assertion results.
 
 </Step>
 
-<Step subtitle="Validation still passes? What gives? (second subschema doesn't define `phenotypicFeatures`">
+<Step subtitle="Validation still passes? What gives?">
 
   <Code
     lang="json"
@@ -718,11 +728,16 @@ The resulting assertion is a combination of the assertion results.
 
 ---
 
+<ContentLayout>
+
 # What did we discover?
 
 - Some keywords have values that are a JSON Schema (a subschema)
 - <code>*Of</code> keywords are applicators that take an array of subschemas
 - You can set the value of a subschema to a boolean <code>false</code> to check the validation path is as you expect
+- The values of a <code>properties</code> object are subschemas which are applied to an objects values accordingly
+
+</ContentLayout>
 
 ---
 
@@ -1108,7 +1123,7 @@ Instance location: "/patient"
 
 ---
 
-### allOf $ref schemas and <code>additionalProperties: false</code>
+### <code>allOf</code> > <code>$ref</code> schemas and <code>additionalProperties: false</code>
 
 Being able to combine schema objects without additional properties is a VERY common pain point.
 
@@ -1120,10 +1135,9 @@ We recognised this and fixed it in draft-8, but that's a whole other talk.
 
 # What else did we discover?
 
-- Some keywords take a schema as their value
 - Schemas may be boolean values, even when as a value of the `properties` object
 - Constructing and merging complex schemas is likely to require some duplication
-- `additionalProperties` CANNOT "See Through" applicator keywords like "*Of" or "$ref".
+- `additionalProperties` CANNOT "See Through" applicator keywords like "*Of" or "$ref"
 
 
 </ContentLayout>
