@@ -30,6 +30,11 @@ export default {
     li: {
       marginBottom: '0.5em',
     },
+    '.noScreen': {
+      '@media screen': {
+        display: 'none'
+      }
+    },
     // LIke githib
     code: {
       backgroundColor: 'rgba(27, 31, 35, 0.05)',

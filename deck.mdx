@@ -15,7 +15,6 @@ import basicSchemas from "./schemas/basic";
 
 import mmev1 from "./static/mme-v1.png";
 import drafts from "./static/drafts.png";
-import profile from "./static/bhutton-circle.png"
 
 export const themes = [swiss, myTheme, github];
 
@@ -24,13 +23,13 @@ export const themes = [swiss, myTheme, github];
 
 ### Core Concepts, Common Pitfalls, and Debugging
 <p>
-  🧔 Ben Hutton - @relequestual<br/>
+  🧔 Ben Hutton<br/>
+  💻 @relequestual on the internet<br/>
   💼 JSON Schema core<br/>
   🙌 <a href="https://opencollective.com/json-schema">opencollective.com/json-schema</a><br/>
   ☕ <a href="https://ko-fi.com/relequestual">ko-fi.com/relequestual</a><br/>
   🎤 ASC 2019 - API Specification Conference 2019
 </p>
-<p>These talks including interactive sections of code.</p>
 
 <Notes>
   Some content
@@ -202,7 +201,7 @@ export const themes = [swiss, myTheme, github];
 **Instance** : The JSON document being validated or associated with a Schema<br/><br/>
 **Root Schema** : Schema that is the whole JSON document<br/>
 **Subschema** : A schema as a value of an object or array<br/><br/><br/>
-Keywords fall under one or both of two categories (mostly):<br/><br/>
+Keywords fall under several behavior categories which include:<br/><br/>
 **Assertions** : produce a boolean result when applied to an instance<br/>
 **Annotations** : attach information to an instance for application use<br/><br/>
 
@@ -457,9 +456,9 @@ Include, but not limited to...
 
 <p>The value of <code>*Of</code> keywords must be an array of Schemas.</p>
 
-The result of applying a schema to an instance is includes an assertion of validity.
+The result of applying a schema to an instance includes an assertion of validity.
 
-The resulting assertion is a combination of the assertion results.
+The resulting assertions results are modified or combined to produce an overall result.
 
 <p>For example, <code>oneOf</code> requires that ONLY one of the Schemas in the array is valid.</p>
 
@@ -1128,9 +1127,9 @@ We recognised this and fixed it in draft-8, but that's a whole other talk.
 
 # What else did we discover?
 
-- Schemas may be boolean values, even when as a value of the `properties` object
+- Schemas may be boolean values, even when as a value of the <code>properties</code> object
 - Constructing and merging complex schemas is likely to require some duplication
-- `additionalProperties` CANNOT "See Through" applicator keywords like "*Of" or "$ref"
+- <code>additionalProperties</code> CANNOT "See Through" applicator keywords like <code>*Of</code> or <code>$ref</code>
 
 
 </ContentLayout>
@@ -1142,7 +1141,7 @@ We recognised this and fixed it in draft-8, but that's a whole other talk.
 - Previous team
 - Current team
 - Contributors and community
-- Implementaion authors
+- Implementaion developers
 - all of you
 
 ---
@@ -1153,7 +1152,9 @@ We recognised this and fixed it in draft-8, but that's a whole other talk.
 
 <p>
   🧔 Ben Hutton<br/>
+  💻 @relequestual on the internet<br/>
   💼 JSON Schema core<br/>
   🙌 <a href="https://opencollective.com/json-schema">opencollective.com/json-schema</a><br/>
+  ☕ <a href="https://ko-fi.com/relequestual">ko-fi.com/relequestual</a><br/>
   🎤 ASC 2019 - API Specification Conference 2019
 </p>
