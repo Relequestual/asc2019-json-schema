@@ -67,6 +67,7 @@ export const themes = [swiss, myTheme, github];
 </ContentLayout>
 
 <Notes>
+
   I'm going to walk through what it might have been like to create a JSON Schema for this API.
 
   The MME API is a federated search (for similar) and response of potential matches using a patient record.
@@ -74,6 +75,7 @@ export const themes = [swiss, myTheme, github];
   Not going to cover the legal, social, or ethical issues. Be assured they were handled properly.
 
   Today is about the technical.
+
 </Notes>
 
 ---
@@ -112,7 +114,10 @@ export const themes = [swiss, myTheme, github];
 ## Requirements for queries
 
 - Root object must have a <code>patient</code>
-- <code>patient</code> must have either properties <code>genomicFeatures</code> or <code>phenotypicFeatures</code> or both
+- <code>patient</code> must have either properties
+- <code>genomicFeatures</code> or
+- <code>phenotypicFeatures</code> or
+- both
 
 </ContentLayout>
 
@@ -440,9 +445,9 @@ Keywords fall under several behavior categories which include:<br/><br/>
 
 # (More) Key Concepts
 
-**Applicator keywords**: Determin how subschemas are applied to an instance location.
+**Applicator keywords**: Determine how subschemas are applied to an instance location.
 
-Include, but not limited to...
+Include, but not limited to;
 
 <p><code>oneOf</code>, <code>allOf</code>, and <code>anyOf</code></p>
 
@@ -454,7 +459,7 @@ Include, but not limited to...
 
 # <code>*Of</code> applicators
 
-<p>The value of <code>*Of</code> keywords must be an array of Schemas.</p>
+<p>The <code>*Of</code> keywords values must be an array of Schemas.</p>
 
 The result of applying a schema to an instance includes an assertion of validity.
 
