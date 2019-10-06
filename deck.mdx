@@ -189,6 +189,8 @@ export const themes = [swiss, myTheme, github];
 # JSON Schema
 
 - This talk covers draft-7. Not draft-4, not draft-8
+- "draft-8" is out, but implementations need to catch up
+- draft-7 is the latest well supported version
 
   <img style={{
     maxWidth: '90%'
@@ -204,8 +206,8 @@ export const themes = [swiss, myTheme, github];
 
 **Schema “keywords”** : Object properties that are applied to the instance<br/><br/>
 **Instance** : The JSON document being validated or associated with a Schema<br/><br/>
-**Root Schema** : Schema that is the whole JSON document<br/>
-**Subschema** : A schema as a value of an object or array<br/><br/><br/>
+**Root Schema** : A Schema that is the whole JSON document<br/>
+**Subschema** : A Schema as a value of an object or array<br/><br/><br/>
 Keywords fall under several behavior categories which include:<br/><br/>
 **Assertions** : produce a boolean result when applied to an instance<br/>
 **Annotations** : attach information to an instance for application use<br/><br/>
@@ -217,7 +219,7 @@ Keywords fall under several behavior categories which include:<br/><br/>
 # "`properties`" keyword
 
 <p><code>properties</code> is an object</p>
-<p>The values of the object are applied to the instance according to matching objects keys</p>
+<p>The values of the object are applied to the instance's matching key's value</p>
 
 ---
 
@@ -463,7 +465,7 @@ Include, but not limited to;
 
 The result of applying a schema to an instance includes an assertion of validity.
 
-The resulting assertions results are modified or combined to produce an overall result.
+The resulting assertions are modified or combined to produce a final result.
 
 <p>For example, <code>oneOf</code> requires that ONLY one of the Schemas in the array is valid.</p>
 
@@ -732,7 +734,7 @@ The resulting assertions results are modified or combined to produce an overall 
 - Some keywords have values that are a JSON Schema (a subschema)
 - <code>*Of</code> keywords are applicators that take an array of subschemas
 - You can set the value of a subschema to a boolean <code>false</code> to check the validation path is as you expect
-- The values of a <code>properties</code> object are subschemas which are applied to an objects values accordingly
+- The values of a <code>properties</code> object are subschemas which are applied to an objects values for matching keys
 
 </ContentLayout>
 
@@ -903,7 +905,7 @@ Instance location: "/patient"
   lang="json"
   code={basicSchemas['016']}
   focus="16:24"
-  subtitle="Now we know `additionalProperties` is applied depending on our `properties`"
+  subtitle="Now we know `additionalProperties` is applied depending on `properties`"
 />
 
 <Code
@@ -1133,7 +1135,7 @@ We recognised this and fixed it in draft-8, but that's a whole other talk.
 # What else did we discover?
 
 - Schemas may be boolean values, even when as a value of the <code>properties</code> object
-- Constructing and merging complex schemas is likely to require some duplication
+- Constructing and merging complex schemas may require some duplication
 - <code>additionalProperties</code> CANNOT "See Through" applicator keywords like <code>*Of</code> or <code>$ref</code>
 
 
@@ -1146,7 +1148,7 @@ We recognised this and fixed it in draft-8, but that's a whole other talk.
 - Previous team
 - Current team
 - Contributors and community
-- Implementaion developers
+- Implementation developers
 - all of you
 
 ---
