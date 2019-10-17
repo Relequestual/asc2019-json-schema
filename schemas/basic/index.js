@@ -9,6 +9,4 @@ const files = fileNames.reduce((contents, file) => ({
   [file]: JSON.stringify(require(`./${file}.json`), null, 2)
 }), {});
 
-console.log(files)
-
 export default files

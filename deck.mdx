@@ -13,8 +13,9 @@ import { Notes, Invert, Appear, Split } from "mdx-deck";
 
 import basicSchemas from "./schemas/basic";
 
-import mmev1 from "./static/mme-v1.png";
-import drafts from "./static/drafts.png";
+import mmev1    from "./static/mme-v1.png";
+import drafts   from "./static/drafts.png";
+import sponsors from "./static/sponsors.png";
 
 export const themes = [swiss, myTheme, github];
 
@@ -30,6 +31,10 @@ export const themes = [swiss, myTheme, github];
   ☕ <a href="https://ko-fi.com/relequestual">ko-fi.com/relequestual</a><br/>
   🎤 ASC 2019 - API Specification Conference 2019
 </p>
+
+<p style="text-align: center; background: lightcyan;">These slides have interactive code which does not display fully in PDF.<br/>
+Please see <a href="https://stoic-agnesi-d0ac4a.netlify.com">https://stoic-agnesi-d0ac4a.netlify.com</a> for the full version.<br/>
+All code used and created for this deck is avilable on <a href="https://github.com/relequestual">github</a>.</p>
 
 <Notes>
   Some content
@@ -189,7 +194,7 @@ export const themes = [swiss, myTheme, github];
 # JSON Schema
 
 - This talk covers draft-7. Not draft-4, not draft-8
-- "draft-8" is out, but implementations need to catch up
+- ~~draft-8~~ "draft <code>2019-09</code>" is out, but implementations need to catch up
 - draft-7 is the latest well supported version
 
   <img style={{
@@ -1153,9 +1158,13 @@ We recognised this and fixed it in draft-8, but that's a whole other talk.
 
 ---
 
-# JSON Schema
+## JSON Schema
 
-### Core Concepts, Common Pitfalls, and Debugging
+<h4 style="margin-top: 0; margin-botton: 0">Core Concepts, Common Pitfalls, and Debugging</h4>
+<h4 style="margin-top: 0; margin-botton: 0">Thank you sponsors!</h4>
+<img style={{
+  maxWidth: '40%'
+}} src={sponsors} />
 
 <p>
   🧔 Ben Hutton<br/>
